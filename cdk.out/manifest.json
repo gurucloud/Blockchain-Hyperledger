@@ -1,0 +1,514 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "HyperledgerTestStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "HyperledgerTestStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "HyperledgerTestStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://933994691605/us-east-1",
+      "properties": {
+        "templateFile": "HyperledgerTestStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-deploy-role-933994691605-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-cfn-exec-role-933994691605-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-933994691605-us-east-1/f8ee3139653fd3d291d99691fb9bd302178a3894b9a62f82552652a9a678fd15.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "HyperledgerTestStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-lookup-role-933994691605-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "HyperledgerTestStack.assets"
+      ],
+      "metadata": {
+        "/HyperledgerTestStack/IntegrationTestNetwork/AdminPassword/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkAdminPasswordCB94E790"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/AdminPrivateKey/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkAdminPrivateKeyA613717D"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/AdminSignedCert/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkAdminSignedCertE1800B2A"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Network": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkFEDC81D0"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node0/Node": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode0Node9BCFF789"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node0/ConfigureNodeLogResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode0ConfigureNodeLogResource4FEF71C4"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node0/ConfigureNodeLogResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode0ConfigureNodeLogResourceCustomResourcePolicyB25BB568"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node0/NodeDataResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode0NodeDataResourceAB2D8738"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node0/NodeDataResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode0NodeDataResourceCustomResourcePolicy610E9878"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node1/Node": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode1Node42670A0E"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node1/ConfigureNodeLogResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode1ConfigureNodeLogResource368FE17B"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node1/ConfigureNodeLogResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode1ConfigureNodeLogResourceCustomResourcePolicy89071BF5"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node1/NodeDataResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode1NodeDataResource7113DB86"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Node1/NodeDataResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNode1NodeDataResourceCustomResourcePolicy9AB5FAC6"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkDataResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkDataResource01F5B5DD"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkDataResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkDataResourceCustomResourcePolicy966D7C85"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/MemberDataResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkMemberDataResourceF0A4DF56"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/MemberDataResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkMemberDataResourceCustomResourcePolicy2C5962EE"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/ConfigureCaLogResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkConfigureCaLogResource72727102"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/ConfigureCaLogResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkConfigureCaLogResourceCustomResourcePolicyC691EE73"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTable66FE118C"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableCFA260A7"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableF7C7481B"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcRestrictDefaultSecurityGroupCustomResourceB8409B7A"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/IAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRole92161DE9"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/IAMRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRoleDefaultPolicy855EB641"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcFlowLogLogGroup1AC36892"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/FlowLog": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcFlowLog4A1EC6AB"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupB061C5F5"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/from HyperledgerTestStackIntegrationTestNetworkIdentityAdminFunctionSecurityGroup7277D804:30001-30004": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupfromHyperledgerTestStackIntegrationTestNetworkIdentityAdminFunctionSecurityGroup7277D8043000130004E9609208"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/from HyperledgerTestStackIntegrationTestNetworkUserFunctionSecurityGroup4101B7CC:30001-30004": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupfromHyperledgerTestStackIntegrationTestNetworkUserFunctionSecurityGroup4101B7CC300013000468F04332"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpoint1EAB5025"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/SecretsManagerEndpoint/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpointSecurityGroup58012CA0"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/SecretsManagerEndpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpoint730357E1"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/S3Endpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkNetworkClientClientVpcS3EndpointB4B6F4C9"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/CustomResourceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/CustomResourceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityCustomResourceRoleDefaultPolicyE62E3F60"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminFunction/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminFunctionSecurityGroupD33FECAC"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminFunctionB750E99D"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleAC21B2D9"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleDefaultPolicyC8CD8CD7"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventAC1DAC4C"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventLogRetention2A4D4698"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserFunction/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserFunctionSecurityGroup991E19B7"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserFunction5FC6C3CD"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleA75B5423"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleDefaultPolicy65DF57F9"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserProviderframeworkonEventD23D88B2"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkUserProviderframeworkonEventLogRetentionFE856488"
+          }
+        ],
+        "/HyperledgerTestStack/IntegrationTestNetwork/AdminCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IntegrationTestNetworkAdminCustomResourceDEB9194A"
+          }
+        ],
+        "/HyperledgerTestStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+          }
+        ],
+        "/HyperledgerTestStack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+          }
+        ],
+        "/HyperledgerTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/HyperledgerTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+          }
+        ],
+        "/HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+          }
+        ],
+        "/HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+          }
+        ],
+        "/HyperledgerTestStack/NetworkId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkId"
+          }
+        ],
+        "/HyperledgerTestStack/MemberId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MemberId"
+          }
+        ],
+        "/HyperledgerTestStack/VpcEndpointServiceName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcEndpointServiceName"
+          }
+        ],
+        "/HyperledgerTestStack/OrdererEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OrdererEndpoint"
+          }
+        ],
+        "/HyperledgerTestStack/CaEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CaEndpoint"
+          }
+        ],
+        "/HyperledgerTestStack/AdminPasswordArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPasswordArn"
+          }
+        ],
+        "/HyperledgerTestStack/AdminPrivateKeyArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPrivateKeyArn"
+          }
+        ],
+        "/HyperledgerTestStack/AdminSignedCertArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminSignedCertArn"
+          }
+        ],
+        "/HyperledgerTestStack/NodeIds": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeIds"
+          }
+        ],
+        "/HyperledgerTestStack/NodeEndpoints": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeEndpoints"
+          }
+        ],
+        "/HyperledgerTestStack/NodeEventEndpoints": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeEventEndpoints"
+          }
+        ],
+        "/HyperledgerTestStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/HyperledgerTestStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/HyperledgerTestStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "HyperledgerTestStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

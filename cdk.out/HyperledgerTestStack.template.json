@@ -1,0 +1,2754 @@
+{
+ "Resources": {
+  "IntegrationTestNetworkAdminPasswordCB94E790": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "GenerateSecretString": {
+     "ExcludeCharacters": "'\"/\\@ &{}<>*|",
+     "PasswordLength": 32,
+     "RequireEachIncludedType": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/AdminPassword/Resource"
+   }
+  },
+  "IntegrationTestNetworkAdminPrivateKeyA613717D": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "GenerateSecretString": {}
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/AdminPrivateKey/Resource"
+   }
+  },
+  "IntegrationTestNetworkAdminSignedCertE1800B2A": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "GenerateSecretString": {}
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/AdminSignedCert/Resource"
+   }
+  },
+  "IntegrationTestNetworkFEDC81D0": {
+   "Type": "AWS::ManagedBlockchain::Member",
+   "Properties": {
+    "MemberConfiguration": {
+     "Description": "IntegrationTestMember",
+     "MemberFrameworkConfiguration": {
+      "MemberFabricConfiguration": {
+       "AdminPassword": {
+        "Fn::Join": [
+         "",
+         [
+          "{{resolve:secretsmanager:",
+          {
+           "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
+          },
+          ":SecretString:::}}"
+         ]
+        ]
+       },
+       "AdminUsername": "admin"
+      }
+     },
+     "Name": "IntegrationTestMember"
+    },
+    "NetworkConfiguration": {
+     "Description": "IntegrationTestNetwork",
+     "Framework": "HYPERLEDGER_FABRIC",
+     "FrameworkVersion": "1.4",
+     "Name": "IntegrationTestNetwork",
+     "NetworkFrameworkConfiguration": {
+      "NetworkFabricConfiguration": {
+       "Edition": "STANDARD"
+      }
+     },
+     "VotingPolicy": {
+      "ApprovalThresholdPolicy": {
+       "ProposalDurationInHours": 24,
+       "ThresholdComparator": "GREATER_THAN",
+       "ThresholdPercentage": 50
+      }
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Network"
+   }
+  },
+  "IntegrationTestNetworkNode0Node9BCFF789": {
+   "Type": "AWS::ManagedBlockchain::Node",
+   "Properties": {
+    "NetworkId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkFEDC81D0",
+      "NetworkId"
+     ]
+    },
+    "NodeConfiguration": {
+     "AvailabilityZone": "us-east-1a",
+     "InstanceType": "bc.m5.large"
+    },
+    "MemberId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkFEDC81D0",
+      "MemberId"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node0/Node"
+   }
+  },
+  "IntegrationTestNetworkNode0ConfigureNodeLogResource4FEF71C4": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode0Node9BCFF789",
+         "NodeId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"ChaincodeLogs\":{\"Cloudwatch\":{\"Enabled\":true}},\"PeerLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode0Node9BCFF789",
+         "NodeId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"ChaincodeLogs\":{\"Cloudwatch\":{\"Enabled\":true}},\"PeerLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNode0ConfigureNodeLogResourceCustomResourcePolicyB25BB568"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node0/ConfigureNodeLogResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkNode0ConfigureNodeLogResourceCustomResourcePolicyB25BB568": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:UpdateNode",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNode0ConfigureNodeLogResourceCustomResourcePolicyB25BB568",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node0/ConfigureNodeLogResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNode0NodeDataResourceAB2D8738": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode0Node9BCFF789",
+         "NodeId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode0Node9BCFF789",
+         "NodeId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNode0NodeDataResourceCustomResourcePolicy610E9878"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node0/NodeDataResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkNode0NodeDataResourceCustomResourcePolicy610E9878": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:GetNode",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNode0NodeDataResourceCustomResourcePolicy610E9878",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node0/NodeDataResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNode1Node42670A0E": {
+   "Type": "AWS::ManagedBlockchain::Node",
+   "Properties": {
+    "NetworkId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkFEDC81D0",
+      "NetworkId"
+     ]
+    },
+    "NodeConfiguration": {
+     "AvailabilityZone": "us-east-1b",
+     "InstanceType": "bc.m5.large"
+    },
+    "MemberId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkFEDC81D0",
+      "MemberId"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node1/Node"
+   }
+  },
+  "IntegrationTestNetworkNode1ConfigureNodeLogResource368FE17B": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode1Node42670A0E",
+         "NodeId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"ChaincodeLogs\":{\"Cloudwatch\":{\"Enabled\":true}},\"PeerLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode1Node42670A0E",
+         "NodeId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"ChaincodeLogs\":{\"Cloudwatch\":{\"Enabled\":true}},\"PeerLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNode1ConfigureNodeLogResourceCustomResourcePolicy89071BF5"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node1/ConfigureNodeLogResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkNode1ConfigureNodeLogResourceCustomResourcePolicy89071BF5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:UpdateNode",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNode1ConfigureNodeLogResourceCustomResourcePolicy89071BF5",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node1/ConfigureNodeLogResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNode1NodeDataResource7113DB86": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode1Node42670A0E",
+         "NodeId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNode\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"NodeId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNode1Node42670A0E",
+         "NodeId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNode1NodeDataResourceCustomResourcePolicy9AB5FAC6"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node1/NodeDataResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkNode1NodeDataResourceCustomResourcePolicy9AB5FAC6": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:GetNode",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNode1NodeDataResourceCustomResourcePolicy9AB5FAC6",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Node1/NodeDataResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkDataResource01F5B5DD": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNetwork\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getNetwork\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNetworkDataResourceCustomResourcePolicy966D7C85"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkDataResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkNetworkDataResourceCustomResourcePolicy966D7C85": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:GetNetwork",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNetworkDataResourceCustomResourcePolicy966D7C85",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkDataResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkMemberDataResourceF0A4DF56": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getMember\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"getMember\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkMemberDataResourceCustomResourcePolicy2C5962EE"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/MemberDataResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkMemberDataResourceCustomResourcePolicy2C5962EE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:GetMember",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkMemberDataResourceCustomResourcePolicy2C5962EE",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/MemberDataResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkConfigureCaLogResource72727102": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateMember\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"CaLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"ManagedBlockchain\",\"action\":\"updateMember\",\"parameters\":{\"NetworkId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "NetworkId"
+        ]
+       },
+       "\",\"MemberId\":\"",
+       {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkFEDC81D0",
+         "MemberId"
+        ]
+       },
+       "\",\"LogPublishingConfiguration\":{\"Fabric\":{\"CaLogs\":{\"Cloudwatch\":{\"Enabled\":true}}}}},\"physicalResourceId\":{\"id\":\"Id\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkConfigureCaLogResourceCustomResourcePolicyC691EE73"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/ConfigureCaLogResource/Resource/Default"
+   }
+  },
+  "IntegrationTestNetworkConfigureCaLogResourceCustomResourcePolicyC691EE73": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "managedblockchain:UpdateMember",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "MemberId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode0Node9BCFF789",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkNode1Node42670A0E",
+             "NodeId"
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:managedblockchain:us-east-1::networks/",
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkFEDC81D0",
+             "NetworkId"
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkConfigureCaLogResourceCustomResourcePolicyC691EE73",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/ConfigureCaLogResource/CustomResourcePolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpc60D080D6": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTable66FE118C": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTable66FE118C"
+    },
+    "SubnetId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableCFA260A7": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableCFA260A7"
+    },
+    "SubnetId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "AvailabilityZone": "us-east-1c",
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/Subnet"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableF7C7481B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/RouteTable"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableF7C7481B"
+    },
+    "SubnetId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/PrivateSubnet3/RouteTableAssociation"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcRestrictDefaultSecurityGroupCustomResourceB8409B7A": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkNetworkClientClientVpc60D080D6",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": "933994691605"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRole92161DE9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "vpc-flow-logs.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/IAMRole/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRoleDefaultPolicy855EB641": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNetworkClientClientVpcFlowLogLogGroup1AC36892",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRole92161DE9",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRoleDefaultPolicy855EB641",
+    "Roles": [
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRole92161DE9"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/IAMRole/DefaultPolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcFlowLogLogGroup1AC36892": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731,
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/LogGroup/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcFlowLog4A1EC6AB": {
+   "Type": "AWS::EC2::FlowLog",
+   "Properties": {
+    "ResourceId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "ResourceType": "VPC",
+    "DeliverLogsPermissionArn": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkNetworkClientClientVpcFlowLogIAMRole92161DE9",
+      "Arn"
+     ]
+    },
+    "LogDestinationType": "cloud-watch-logs",
+    "LogGroupName": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpcFlowLogLogGroup1AC36892"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ],
+    "TrafficType": "ALL"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/FlowLog/FlowLog"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupB061C5F5": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ],
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupfromHyperledgerTestStackIntegrationTestNetworkIdentityAdminFunctionSecurityGroup7277D8043000130004E9609208": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "from HyperledgerTestStackIntegrationTestNetworkIdentityAdminFunctionSecurityGroup7277D804:30001-30004",
+    "FromPort": 30001,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupB061C5F5",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkIdentityAdminFunctionSecurityGroupD33FECAC",
+      "GroupId"
+     ]
+    },
+    "ToPort": 30004
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/from HyperledgerTestStackIntegrationTestNetworkIdentityAdminFunctionSecurityGroup7277D804:30001-30004"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupfromHyperledgerTestStackIntegrationTestNetworkUserFunctionSecurityGroup4101B7CC300013000468F04332": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "from HyperledgerTestStackIntegrationTestNetworkUserFunctionSecurityGroup4101B7CC:30001-30004",
+    "FromPort": 30001,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupB061C5F5",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkUserFunctionSecurityGroup991E19B7",
+      "GroupId"
+     ]
+    },
+    "ToPort": 30004
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/SecurityGroup/from HyperledgerTestStackIntegrationTestNetworkUserFunctionSecurityGroup4101B7CC:30001-30004"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpoint1EAB5025": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "ServiceName": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkNetworkDataResource01F5B5DD",
+      "Network.VpcEndpointServiceName"
+     ]
+    },
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IntegrationTestNetworkNetworkClientClientVpcNetworkEndpointSecurityGroupB061C5F5",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetIds": [
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+     }
+    ],
+    "VpcEndpointType": "Interface"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/NetworkEndpoint/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpointSecurityGroup58012CA0": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/SecretsManagerEndpoint/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNetworkClientClientVpc60D080D6",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "IntegrationTestNetworkNetworkClientClientVpc60D080D6",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc"
+     }
+    ],
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/SecretsManagerEndpoint/SecurityGroup/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpoint730357E1": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "ServiceName": "com.amazonaws.us-east-1.secretsmanager",
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpointSecurityGroup58012CA0",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetIds": [
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+     }
+    ],
+    "VpcEndpointType": "Interface"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/SecretsManagerEndpoint/Resource"
+   }
+  },
+  "IntegrationTestNetworkNetworkClientClientVpcS3EndpointB4B6F4C9": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".s3"
+      ]
+     ]
+    },
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    },
+    "RouteTableIds": [
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTable66FE118C"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableCFA260A7"
+     },
+     {
+      "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableF7C7481B"
+     }
+    ],
+    "VpcEndpointType": "Gateway"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/NetworkClient/ClientVpc/S3Endpoint/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/CustomResourceRole/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityCustomResourceRoleDefaultPolicyE62E3F60": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:PutSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:s3:::us-east-1.managedblockchain/*",
+        {
+         "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
+        },
+        {
+         "Ref": "IntegrationTestNetworkAdminPrivateKeyA613717D"
+        },
+        {
+         "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkIdentityCustomResourceRoleDefaultPolicyE62E3F60",
+    "Roles": [
+     {
+      "Ref": "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/CustomResourceRole/DefaultPolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminFunctionSecurityGroupD33FECAC": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function HyperledgerTestStackIntegrationTestNetworkIdentityAdminFunction48D300F0",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    }
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminFunction/SecurityGroup/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminFunctionB750E99D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "ADMIN_PASSWORD_ARN": {
+       "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
+      },
+      "CA_ENDPOINT": {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkMemberDataResourceF0A4DF56",
+        "Member.FrameworkAttributes.Fabric.CaEndpoint"
+       ]
+      },
+      "PRIVATE_KEY_ARN": {
+       "Ref": "IntegrationTestNetworkAdminPrivateKeyA613717D"
+      },
+      "SIGNED_CERT_ARN": {
+       "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
+      },
+      "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+      "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
+     }
+    },
+    "Handler": "enroll-admin.handler",
+    "Runtime": "nodejs14.x",
+    "Timeout": 60,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkIdentityAdminFunctionSecurityGroupD33FECAC",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+      },
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+      },
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkIdentityCustomResourceRoleDefaultPolicyE62E3F60",
+    "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminFunction/Resource",
+    "aws:asset:path": "C:\\Users\\Rajaguru Selvaraj\\Desktop\\hyper\\infra\\node_modules\\@cdklabs\\cdk-hyperledger-fabric-network\\lambdas\\fabric",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleAC21B2D9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/ServiceRole/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleDefaultPolicyC8CD8CD7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "IntegrationTestNetworkIdentityAdminFunctionB750E99D",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkIdentityAdminFunctionB750E99D",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleDefaultPolicyC8CD8CD7",
+    "Roles": [
+     {
+      "Ref": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleAC21B2D9"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminProviderframeworkonEventAC1DAC4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleAC21B2D9",
+      "Arn"
+     ]
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkIdentityAdminFunctionB750E99D",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Runtime": "nodejs16.x",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleDefaultPolicyC8CD8CD7",
+    "IntegrationTestNetworkIdentityAdminProviderframeworkonEventServiceRoleAC21B2D9"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/Resource",
+    "aws:asset:path": "asset.8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "IntegrationTestNetworkIdentityAdminProviderframeworkonEventLogRetention2A4D4698": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "IntegrationTestNetworkIdentityAdminProviderframeworkonEventAC1DAC4C"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 1
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminProvider/framework-onEvent/LogRetention/Resource"
+   }
+  },
+  "IntegrationTestNetworkUserFunctionSecurityGroup991E19B7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function HyperledgerTestStackIntegrationTestNetworkUserFunction0BEF45D4",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
+    }
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserFunction/SecurityGroup/Resource"
+   }
+  },
+  "IntegrationTestNetworkUserFunction5FC6C3CD": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "CA_ENDPOINT": {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkMemberDataResourceF0A4DF56",
+        "Member.FrameworkAttributes.Fabric.CaEndpoint"
+       ]
+      },
+      "MEMBER_NAME": "IntegrationTestMember",
+      "PRIVATE_KEY_ARN": {
+       "Ref": "IntegrationTestNetworkAdminPrivateKeyA613717D"
+      },
+      "SIGNED_CERT_ARN": {
+       "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
+      },
+      "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+      "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
+     }
+    },
+    "Handler": "register-user.handler",
+    "Runtime": "nodejs14.x",
+    "Timeout": 60,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkUserFunctionSecurityGroup991E19B7",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1SubnetF104D4AB"
+      },
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2SubnetF41643CA"
+      },
+      {
+       "Ref": "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3SubnetB06DE38F"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkIdentityCustomResourceRoleDefaultPolicyE62E3F60",
+    "IntegrationTestNetworkIdentityCustomResourceRole6F4E7BB4",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet1RouteTableAssociationE5543EA0",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet2RouteTableAssociationDF319C8E",
+    "IntegrationTestNetworkNetworkClientClientVpcPrivateSubnet3RouteTableAssociationC73B2BB6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserFunction/Resource",
+    "aws:asset:path": "C:\\Users\\Rajaguru Selvaraj\\Desktop\\hyper\\infra\\node_modules\\@cdklabs\\cdk-hyperledger-fabric-network\\lambdas\\fabric",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleA75B5423": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/ServiceRole/Resource"
+   }
+  },
+  "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleDefaultPolicy65DF57F9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "IntegrationTestNetworkUserFunction5FC6C3CD",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "IntegrationTestNetworkUserFunction5FC6C3CD",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleDefaultPolicy65DF57F9",
+    "Roles": [
+     {
+      "Ref": "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleA75B5423"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "IntegrationTestNetworkUserProviderframeworkonEventD23D88B2": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleA75B5423",
+      "Arn"
+     ]
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (HyperledgerTestStack/IntegrationTestNetwork/UserProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkUserFunction5FC6C3CD",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Runtime": "nodejs16.x",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleDefaultPolicy65DF57F9",
+    "IntegrationTestNetworkUserProviderframeworkonEventServiceRoleA75B5423"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/Resource",
+    "aws:asset:path": "asset.8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "IntegrationTestNetworkUserProviderframeworkonEventLogRetentionFE856488": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "IntegrationTestNetworkUserProviderframeworkonEventD23D88B2"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 1
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserProvider/framework-onEvent/LogRetention/Resource"
+   }
+  },
+  "IntegrationTestNetworkAdminCustomResourceDEB9194A": {
+   "Type": "AWS::CloudFormation::CustomResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "IntegrationTestNetworkIdentityAdminProviderframeworkonEventAC1DAC4C",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/AdminCustomResource/Default"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "c56527323fe165e19e5c38b88f77270ba67c06d0fd17823264a8e1268ef9ce50.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Handler": "index.handler",
+    "Runtime": "nodejs16.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.c56527323fe165e19e5c38b88f77270ba67c06d0fd17823264a8e1268ef9ce50",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:us-east-1:933994691605:security-group/",
+             {
+              "Fn::GetAtt": [
+               "IntegrationTestNetworkNetworkClientClientVpc60D080D6",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386",
+    "aws:asset:property": "Code"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:DeleteRetentionPolicy",
+        "logs:PutRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     {
+      "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs16.x",
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Key": "5fa1330271b8967d9254ba2d4a07144f8acefe8b77e6d6bba38261373a50d5f8.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+    "aws:asset:path": "asset.5fa1330271b8967d9254ba2d4a07144f8acefe8b77e6d6bba38261373a50d5f8",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31SXU/cMBD8Lbw7hgO1ur71OBWK1NJTqHg9bZy9YOLYkde+6BTlv3ed5AICqU8ez3g/PLvXcv1FXl1AR5kq68zoQvZPAVQtmNr3hMpjoAYsVOhZGu9ie7ATGsQklYVxqlYvoK3sWf2NTYE+vXt0JQ7CQFOUwPHaVgaDs3fRqqCdFQvgt2c8CA2N7HfOaHVKwoxyZzBd0zkIVNeyf25VYp53W7Hz+ggBn2Jh5xYXlLsY8C8UU/jEv3EbIqc0TO0Y1/1y1djNDB9sQH8AhVzrhy1bp20Q/P3odTjdexfb2Y//EA+28kg0t7pkued+Ozi9S8xWuYpkz4WXTAtmkGNAO3lEN3sg4unITTr4Lm+jqjHcArE9KlJwzZ7LuugVcs5NR9uRzGeOLXNHXaIfxAcheXbGCxjL8HJUPMQPAedEKfBPDG3kj1zJtbxZfbv4zotloKDLtGAvpxa9wZK3KTtA4bXKeBad87Xsf75pd6P0OCnis8BL9ZndGo3JQcuqfKXL42otV195u19J68xH9q1BmU/nP3vk9s75AgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HyperledgerTestStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "NetworkId": {
+   "Description": "Managed Blockchain network identifier",
+   "Value": {
+    "Fn::GetAtt": [
+     "IntegrationTestNetworkFEDC81D0",
+     "NetworkId"
+    ]
+   }
+  },
+  "MemberId": {
+   "Description": "Managed Blockchain member identifier",
+   "Value": {
+    "Fn::GetAtt": [
+     "IntegrationTestNetworkFEDC81D0",
+     "MemberId"
+    ]
+   }
+  },
+  "VpcEndpointServiceName": {
+   "Description": "Managed Blockchain network VPC endpoint service name",
+   "Value": {
+    "Fn::GetAtt": [
+     "IntegrationTestNetworkNetworkDataResource01F5B5DD",
+     "Network.VpcEndpointServiceName"
+    ]
+   }
+  },
+  "OrdererEndpoint": {
+   "Description": "Managed Blockchain network ordering service endpoint",
+   "Value": {
+    "Fn::GetAtt": [
+     "IntegrationTestNetworkNetworkDataResource01F5B5DD",
+     "Network.FrameworkAttributes.Fabric.OrderingServiceEndpoint"
+    ]
+   }
+  },
+  "CaEndpoint": {
+   "Description": "Managed Blockchain member CA endpoint",
+   "Value": {
+    "Fn::GetAtt": [
+     "IntegrationTestNetworkMemberDataResourceF0A4DF56",
+     "Member.FrameworkAttributes.Fabric.CaEndpoint"
+    ]
+   }
+  },
+  "AdminPasswordArn": {
+   "Description": "Secret ARN for the Hyperledger Fabric admin password",
+   "Value": {
+    "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
+   }
+  },
+  "AdminPrivateKeyArn": {
+   "Description": "Secret ARN for Hyperledger Fabric admin private key",
+   "Value": {
+    "Ref": "IntegrationTestNetworkAdminPrivateKeyA613717D"
+   }
+  },
+  "AdminSignedCertArn": {
+   "Description": "Secret ARN for Hyperledger Fabric admin signed certificate",
+   "Value": {
+    "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
+   }
+  },
+  "NodeIds": {
+   "Description": "Comma-separated list of Managed Blockchain node identifiers",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode0Node9BCFF789",
+        "NodeId"
+       ]
+      },
+      ",",
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode1Node42670A0E",
+        "NodeId"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "NodeEndpoints": {
+   "Description": "Comma-separated list of Managed Blockchain node endpoints",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode0NodeDataResourceAB2D8738",
+        "Node.FrameworkAttributes.Fabric.PeerEndpoint"
+       ]
+      },
+      ",",
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode1NodeDataResource7113DB86",
+        "Node.FrameworkAttributes.Fabric.PeerEndpoint"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "NodeEventEndpoints": {
+   "Description": "Comma-separated list of Managed Blockchain node event endpoints",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode0NodeDataResourceAB2D8738",
+        "Node.FrameworkAttributes.Fabric.PeerEventEndpoint"
+       ]
+      },
+      ",",
+      {
+       "Fn::GetAtt": [
+        "IntegrationTestNetworkNode1NodeDataResource7113DB86",
+        "Node.FrameworkAttributes.Fabric.PeerEventEndpoint"
+       ]
+      }
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
