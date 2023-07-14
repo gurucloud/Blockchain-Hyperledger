@@ -4,6 +4,785 @@
     "id": "App",
     "path": "",
     "children": {
+      "NetworkStack": {
+        "id": "NetworkStack",
+        "path": "NetworkStack",
+        "children": {
+          "demo-vpc": {
+            "id": "demo-vpc",
+            "path": "NetworkStack/demo-vpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "NetworkStack/demo-vpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "NetworkStack/demo-vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.85.0"
+                }
+              },
+              "public-subnet-1Subnet1": {
+                "id": "public-subnet-1Subnet1",
+                "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1a",
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet-1"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet1RouteTableFA178F19"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcpublicsubnet1Subnet1SubnetD97377BC"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet1RouteTableFA178F19"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "demovpcIGW56AC0B57"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "public-subnet-1Subnet2": {
+                "id": "public-subnet-1Subnet2",
+                "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1b",
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet-1"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet2RouteTable245A8A34"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcpublicsubnet1Subnet2SubnetBAC0E825"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet2RouteTable245A8A34"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "demovpcIGW56AC0B57"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "public-subnet-1Subnet3": {
+                "id": "public-subnet-1Subnet3",
+                "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1c",
+                        "cidrBlock": "10.0.2.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet-1"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/public-subnet-1Subnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet3RouteTable6779F156"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcpublicsubnet1Subnet3Subnet165F0B1C"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "NetworkStack/demo-vpc/public-subnet-1Subnet3/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcpublicsubnet1Subnet3RouteTable6779F156"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "demovpcIGW56AC0B57"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "private-subnetSubnet1": {
+                "id": "private-subnetSubnet1",
+                "path": "NetworkStack/demo-vpc/private-subnetSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1a",
+                        "cidrBlock": "10.0.3.0/28",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcprivatesubnetSubnet1RouteTableB2744116"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcprivatesubnetSubnet1Subnet19061EB3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "private-subnetSubnet2": {
+                "id": "private-subnetSubnet2",
+                "path": "NetworkStack/demo-vpc/private-subnetSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1b",
+                        "cidrBlock": "10.0.3.16/28",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcprivatesubnetSubnet2RouteTableC03DFA2B"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcprivatesubnetSubnet2SubnetE3780BBD"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "private-subnetSubnet3": {
+                "id": "private-subnetSubnet3",
+                "path": "NetworkStack/demo-vpc/private-subnetSubnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "availabilityZone": "ap-southeast-1c",
+                        "cidrBlock": "10.0.3.32/28",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "demovpc6A63F275"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/demo-vpc/private-subnetSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/demo-vpc/private-subnetSubnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "demovpcprivatesubnetSubnet3RouteTable004D01A8"
+                        },
+                        "subnetId": {
+                          "Ref": "demovpcprivatesubnetSubnet3SubnetD5FAF284"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.85.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "NetworkStack/demo-vpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "NetworkStack/demo-vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.85.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "NetworkStack/demo-vpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "demovpc6A63F275"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "demovpcIGW56AC0B57"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.85.0"
+                }
+              },
+              "RestrictDefaultSecurityGroupCustomResource": {
+                "id": "RestrictDefaultSecurityGroupCustomResource",
+                "path": "NetworkStack/demo-vpc/RestrictDefaultSecurityGroupCustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "NetworkStack/demo-vpc/RestrictDefaultSecurityGroupCustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.85.0"
+            }
+          },
+          "Custom::VpcRestrictDefaultSGCustomResourceProvider": {
+            "id": "Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.85.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.85.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.85.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "NetworkStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "NetworkStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.62"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "NetworkStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.85.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "NetworkStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.85.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.85.0"
+        }
+      },
       "HyperledgerTestStack": {
         "id": "HyperledgerTestStack",
         "path": "HyperledgerTestStack",
@@ -157,8 +936,8 @@
                           ]
                         },
                         "nodeConfiguration": {
-                          "availabilityZone": "us-east-1a",
-                          "instanceType": "bc.m5.large"
+                          "availabilityZone": "ap-southeast-1a",
+                          "instanceType": "bc.t3.small"
                         },
                         "memberId": {
                           "Fn::GetAtt": [
@@ -223,7 +1002,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -237,7 +1016,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode0Node9BCFF789",
@@ -251,7 +1030,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode1Node42670A0E",
@@ -265,7 +1044,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1::networks/",
+                                              "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -355,7 +1134,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -369,7 +1148,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode0Node9BCFF789",
@@ -383,7 +1162,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode1Node42670A0E",
@@ -397,7 +1176,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1::networks/",
+                                              "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -440,7 +1219,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@cdklabs/cdk-hyperledger-fabric-network.HyperledgerFabricNode",
-                  "version": "0.8.319"
+                  "version": "0.8.323"
                 }
               },
               "Node1": {
@@ -460,8 +1239,8 @@
                           ]
                         },
                         "nodeConfiguration": {
-                          "availabilityZone": "us-east-1b",
-                          "instanceType": "bc.m5.large"
+                          "availabilityZone": "ap-southeast-1b",
+                          "instanceType": "bc.t3.small"
                         },
                         "memberId": {
                           "Fn::GetAtt": [
@@ -526,7 +1305,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -540,7 +1319,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode0Node9BCFF789",
@@ -554,7 +1333,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode1Node42670A0E",
@@ -568,7 +1347,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1::networks/",
+                                              "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -658,7 +1437,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -672,7 +1451,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode0Node9BCFF789",
@@ -686,7 +1465,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                              "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkNode1Node42670A0E",
@@ -700,7 +1479,7 @@
                                           "Fn::Join": [
                                             "",
                                             [
-                                              "arn:aws:managedblockchain:us-east-1::networks/",
+                                              "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                               {
                                                 "Fn::GetAtt": [
                                                   "IntegrationTestNetworkFEDC81D0",
@@ -743,7 +1522,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@cdklabs/cdk-hyperledger-fabric-network.HyperledgerFabricNode",
-                  "version": "0.8.319"
+                  "version": "0.8.323"
                 }
               },
               "NetworkDataResource": {
@@ -796,7 +1575,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -810,7 +1589,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode0Node9BCFF789",
@@ -824,7 +1603,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode1Node42670A0E",
@@ -838,7 +1617,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1::networks/",
+                                          "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -928,7 +1707,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -942,7 +1721,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode0Node9BCFF789",
@@ -956,7 +1735,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode1Node42670A0E",
@@ -970,7 +1749,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1::networks/",
+                                          "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -1060,7 +1839,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -1074,7 +1853,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode0Node9BCFF789",
@@ -1088,7 +1867,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+                                          "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkNode1Node42670A0E",
@@ -1102,7 +1881,7 @@
                                       "Fn::Join": [
                                         "",
                                         [
-                                          "arn:aws:managedblockchain:us-east-1::networks/",
+                                          "arn:aws:managedblockchain:ap-southeast-1::networks/",
                                           {
                                             "Fn::GetAtt": [
                                               "IntegrationTestNetworkFEDC81D0",
@@ -1186,7 +1965,7 @@
                                 "vpcId": {
                                   "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
                                 },
-                                "availabilityZone": "us-east-1a",
+                                "availabilityZone": "ap-southeast-1a",
                                 "cidrBlock": "10.0.0.0/18",
                                 "mapPublicIpOnLaunch": false,
                                 "tags": [
@@ -1278,7 +2057,7 @@
                                 "vpcId": {
                                   "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
                                 },
-                                "availabilityZone": "us-east-1b",
+                                "availabilityZone": "ap-southeast-1b",
                                 "cidrBlock": "10.0.64.0/18",
                                 "mapPublicIpOnLaunch": false,
                                 "tags": [
@@ -1370,7 +2149,7 @@
                                 "vpcId": {
                                   "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
                                 },
-                                "availabilityZone": "us-east-1c",
+                                "availabilityZone": "ap-southeast-1c",
                                 "cidrBlock": "10.0.128.0/18",
                                 "mapPublicIpOnLaunch": false,
                                 "tags": [
@@ -1877,7 +2656,7 @@
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::EC2::VPCEndpoint",
                               "aws:cdk:cloudformation:props": {
-                                "serviceName": "com.amazonaws.us-east-1.secretsmanager",
+                                "serviceName": "com.amazonaws.ap-southeast-1.secretsmanager",
                                 "vpcId": {
                                   "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
                                 },
@@ -1974,7 +2753,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@cdklabs/cdk-hyperledger-fabric-network.HyperledgerFabricClient",
-                  "version": "0.8.319"
+                  "version": "0.8.323"
                 }
               },
               "Identity": {
@@ -2065,7 +2844,7 @@
                                       ],
                                       "Effect": "Allow",
                                       "Resource": [
-                                        "arn:aws:s3:::us-east-1.managedblockchain/*",
+                                        "arn:aws:s3:::ap-southeast-1.managedblockchain/*",
                                         {
                                           "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
                                         },
@@ -2176,7 +2955,7 @@
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
                             "code": {
-                              "s3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+                              "s3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
                               "s3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
                             },
                             "role": {
@@ -2202,7 +2981,7 @@
                                 "SIGNED_CERT_ARN": {
                                   "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
                                 },
-                                "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+                                "TLS_CERT_BUCKET": "ap-southeast-1.managedblockchain",
                                 "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
                               }
                             },
@@ -2401,7 +3180,7 @@
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
                                 "code": {
-                                  "s3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+                                  "s3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
                                   "s3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
                                 },
                                 "role": {
@@ -2472,7 +3251,7 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.2.58"
+                  "version": "10.2.62"
                 }
               },
               "UserFunction": {
@@ -2546,7 +3325,7 @@
                       "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                       "aws:cdk:cloudformation:props": {
                         "code": {
-                          "s3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+                          "s3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
                           "s3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
                         },
                         "role": {
@@ -2570,7 +3349,7 @@
                             "SIGNED_CERT_ARN": {
                               "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
                             },
-                            "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+                            "TLS_CERT_BUCKET": "ap-southeast-1.managedblockchain",
                             "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
                           }
                         },
@@ -2769,7 +3548,7 @@
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
                             "code": {
-                              "s3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+                              "s3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
                               "s3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
                             },
                             "role": {
@@ -2858,7 +3637,7 @@
             },
             "constructInfo": {
               "fqn": "@cdklabs/cdk-hyperledger-fabric-network.HyperledgerFabricNetwork",
-              "version": "0.8.319"
+              "version": "0.8.323"
             }
           },
           "AWS679f53fac002430cb0da5b7982bd2287": {
@@ -2955,7 +3734,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "s3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+                      "s3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
                       "s3Key": "c56527323fe165e19e5c38b88f77270ba67c06d0fd17823264a8e1268ef9ce50.zip"
                     },
                     "role": {
@@ -3154,95 +3933,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.2.58"
-            }
-          },
-          "NetworkId": {
-            "id": "NetworkId",
-            "path": "HyperledgerTestStack/NetworkId",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "MemberId": {
-            "id": "MemberId",
-            "path": "HyperledgerTestStack/MemberId",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "VpcEndpointServiceName": {
-            "id": "VpcEndpointServiceName",
-            "path": "HyperledgerTestStack/VpcEndpointServiceName",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "OrdererEndpoint": {
-            "id": "OrdererEndpoint",
-            "path": "HyperledgerTestStack/OrdererEndpoint",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "CaEndpoint": {
-            "id": "CaEndpoint",
-            "path": "HyperledgerTestStack/CaEndpoint",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "AdminPasswordArn": {
-            "id": "AdminPasswordArn",
-            "path": "HyperledgerTestStack/AdminPasswordArn",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "AdminPrivateKeyArn": {
-            "id": "AdminPrivateKeyArn",
-            "path": "HyperledgerTestStack/AdminPrivateKeyArn",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "AdminSignedCertArn": {
-            "id": "AdminSignedCertArn",
-            "path": "HyperledgerTestStack/AdminSignedCertArn",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "NodeIds": {
-            "id": "NodeIds",
-            "path": "HyperledgerTestStack/NodeIds",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "NodeEndpoints": {
-            "id": "NodeEndpoints",
-            "path": "HyperledgerTestStack/NodeEndpoints",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
-            }
-          },
-          "NodeEventEndpoints": {
-            "id": "NodeEventEndpoints",
-            "path": "HyperledgerTestStack/NodeEventEndpoints",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.85.0"
+              "version": "10.2.62"
             }
           },
           "CDKMetadata": {
@@ -3260,7 +3951,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.2.58"
+              "version": "10.2.62"
             }
           },
           "BootstrapVersion": {
@@ -3290,7 +3981,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.2.58"
+          "version": "10.2.62"
         }
       }
     },

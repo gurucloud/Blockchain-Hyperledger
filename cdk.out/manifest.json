@@ -1,6 +1,221 @@
 {
   "version": "32.0.0",
   "artifacts": {
+    "NetworkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "NetworkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "NetworkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://799671204862/ap-southeast-1",
+      "properties": {
+        "templateFile": "NetworkStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-deploy-role-799671204862-ap-southeast-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-cfn-exec-role-799671204862-ap-southeast-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-799671204862-ap-southeast-1/c59f8f4d081c0fa7c1bc149ae5b1480ae9a7e7e197ccc3b32141d4a84afba2df.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "NetworkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-lookup-role-799671204862-ap-southeast-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "NetworkStack.assets"
+      ],
+      "metadata": {
+        "/NetworkStack/demo-vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpc6A63F275"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet1SubnetD97377BC"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet1RouteTableFA178F19"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet1RouteTableAssociation10EDCF5E"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet1DefaultRoute07588DCD"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet2SubnetBAC0E825"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet2RouteTable245A8A34"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet2RouteTableAssociation9C61879E"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet2DefaultRoute87CCFA03"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet3Subnet165F0B1C"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet3RouteTable6779F156"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet3RouteTableAssociation0A2249BF"
+          }
+        ],
+        "/NetworkStack/demo-vpc/public-subnet-1Subnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcpublicsubnet1Subnet3DefaultRoute272F6751"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet1Subnet19061EB3"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet1RouteTableB2744116"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet1RouteTableAssociation52A04A51"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet2SubnetE3780BBD"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet2RouteTableC03DFA2B"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet2RouteTableAssociation0F963082"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet3SubnetD5FAF284"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet3RouteTable004D01A8"
+          }
+        ],
+        "/NetworkStack/demo-vpc/private-subnetSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcprivatesubnetSubnet3RouteTableAssociation252DAFC3"
+          }
+        ],
+        "/NetworkStack/demo-vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcIGW56AC0B57"
+          }
+        ],
+        "/NetworkStack/demo-vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcVPCGWF2B48F8C"
+          }
+        ],
+        "/NetworkStack/demo-vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demovpcRestrictDefaultSecurityGroupCustomResourceA7B27EE1"
+          }
+        ],
+        "/NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/NetworkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/NetworkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/NetworkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "NetworkStack"
+    },
     "HyperledgerTestStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -11,20 +226,20 @@
     },
     "HyperledgerTestStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://933994691605/us-east-1",
+      "environment": "aws://799671204862/ap-southeast-1",
       "properties": {
         "templateFile": "HyperledgerTestStack.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-deploy-role-933994691605-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-cfn-exec-role-933994691605-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-933994691605-us-east-1/f8ee3139653fd3d291d99691fb9bd302178a3894b9a62f82552652a9a678fd15.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-deploy-role-799671204862-ap-southeast-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-cfn-exec-role-799671204862-ap-southeast-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-799671204862-ap-southeast-1/8f198ab898a99fb6b492e2c31066fd06ea188f71a205c03112167e9e97e57f34.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "HyperledgerTestStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::933994691605:role/cdk-hnb659fds-lookup-role-933994691605-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::799671204862:role/cdk-hnb659fds-lookup-role-799671204862-ap-southeast-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -415,72 +630,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
-          }
-        ],
-        "/HyperledgerTestStack/NetworkId": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NetworkId"
-          }
-        ],
-        "/HyperledgerTestStack/MemberId": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "MemberId"
-          }
-        ],
-        "/HyperledgerTestStack/VpcEndpointServiceName": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "VpcEndpointServiceName"
-          }
-        ],
-        "/HyperledgerTestStack/OrdererEndpoint": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "OrdererEndpoint"
-          }
-        ],
-        "/HyperledgerTestStack/CaEndpoint": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CaEndpoint"
-          }
-        ],
-        "/HyperledgerTestStack/AdminPasswordArn": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AdminPasswordArn"
-          }
-        ],
-        "/HyperledgerTestStack/AdminPrivateKeyArn": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AdminPrivateKeyArn"
-          }
-        ],
-        "/HyperledgerTestStack/AdminSignedCertArn": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AdminSignedCertArn"
-          }
-        ],
-        "/HyperledgerTestStack/NodeIds": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NodeIds"
-          }
-        ],
-        "/HyperledgerTestStack/NodeEndpoints": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NodeEndpoints"
-          }
-        ],
-        "/HyperledgerTestStack/NodeEventEndpoints": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NodeEventEndpoints"
           }
         ],
         "/HyperledgerTestStack/CDKMetadata/Default": [

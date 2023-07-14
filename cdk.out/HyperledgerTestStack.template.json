@@ -94,8 +94,8 @@
      ]
     },
     "NodeConfiguration": {
-     "AvailabilityZone": "us-east-1a",
-     "InstanceType": "bc.m5.large"
+     "AvailabilityZone": "ap-southeast-1a",
+     "InstanceType": "bc.t3.small"
     },
     "MemberId": {
      "Fn::GetAtt": [
@@ -199,7 +199,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -213,7 +213,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -227,7 +227,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -241,7 +241,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -358,7 +358,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -372,7 +372,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -386,7 +386,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -400,7 +400,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -436,8 +436,8 @@
      ]
     },
     "NodeConfiguration": {
-     "AvailabilityZone": "us-east-1b",
-     "InstanceType": "bc.m5.large"
+     "AvailabilityZone": "ap-southeast-1b",
+     "InstanceType": "bc.t3.small"
     },
     "MemberId": {
      "Fn::GetAtt": [
@@ -541,7 +541,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -555,7 +555,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -569,7 +569,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -583,7 +583,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -700,7 +700,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -714,7 +714,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -728,7 +728,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -742,7 +742,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -831,7 +831,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -845,7 +845,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -859,7 +859,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -873,7 +873,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -976,7 +976,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -990,7 +990,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -1004,7 +1004,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -1018,7 +1018,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -1121,7 +1121,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:members/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:members/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -1135,7 +1135,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode0Node9BCFF789",
@@ -1149,7 +1149,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1:933994691605:nodes/",
+           "arn:aws:managedblockchain:ap-southeast-1:799671204862:nodes/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkNode1Node42670A0E",
@@ -1163,7 +1163,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:managedblockchain:us-east-1::networks/",
+           "arn:aws:managedblockchain:ap-southeast-1::networks/",
            {
             "Fn::GetAtt": [
              "IntegrationTestNetworkFEDC81D0",
@@ -1213,7 +1213,7 @@
     "VpcId": {
      "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
     },
-    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZone": "ap-southeast-1a",
     "CidrBlock": "10.0.0.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -1272,7 +1272,7 @@
     "VpcId": {
      "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
     },
-    "AvailabilityZone": "us-east-1b",
+    "AvailabilityZone": "ap-southeast-1b",
     "CidrBlock": "10.0.64.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -1331,7 +1331,7 @@
     "VpcId": {
      "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
     },
-    "AvailabilityZone": "us-east-1c",
+    "AvailabilityZone": "ap-southeast-1c",
     "CidrBlock": "10.0.128.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -1399,7 +1399,7 @@
       "DefaultSecurityGroup"
      ]
     },
-    "Account": "933994691605"
+    "Account": "799671204862"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
@@ -1689,7 +1689,7 @@
   "IntegrationTestNetworkNetworkClientClientVpcSecretsManagerEndpoint730357E1": {
    "Type": "AWS::EC2::VPCEndpoint",
    "Properties": {
-    "ServiceName": "com.amazonaws.us-east-1.secretsmanager",
+    "ServiceName": "com.amazonaws.ap-southeast-1.secretsmanager",
     "VpcId": {
      "Ref": "IntegrationTestNetworkNetworkClientClientVpc60D080D6"
     },
@@ -1814,7 +1814,7 @@
        ],
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:s3:::us-east-1.managedblockchain/*",
+        "arn:aws:s3:::ap-southeast-1.managedblockchain/*",
         {
          "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
         },
@@ -1868,7 +1868,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
     },
     "Role": {
@@ -1894,7 +1894,7 @@
       "SIGNED_CERT_ARN": {
        "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
       },
-      "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+      "TLS_CERT_BUCKET": "ap-southeast-1.managedblockchain",
       "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
      }
     },
@@ -1932,7 +1932,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/Identity/AdminFunction/Resource",
-    "aws:asset:path": "C:\\Users\\Rajaguru Selvaraj\\Desktop\\hyper\\infra\\node_modules\\@cdklabs\\cdk-hyperledger-fabric-network\\lambdas\\fabric",
+    "aws:asset:path": "/mnt/c/Users/SivaprakashSelvamani/Downloads/final_hyper/hyper/node_modules/@cdklabs/cdk-hyperledger-fabric-network/lambdas/fabric",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -2020,7 +2020,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
     },
     "Role": {
@@ -2109,7 +2109,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "a87b8af13ebd4864e259ae980c6faa43ef6f309cc248082f4e7497101886526b.zip"
     },
     "Role": {
@@ -2133,7 +2133,7 @@
       "SIGNED_CERT_ARN": {
        "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
       },
-      "TLS_CERT_BUCKET": "us-east-1.managedblockchain",
+      "TLS_CERT_BUCKET": "ap-southeast-1.managedblockchain",
       "TLS_CERT_KEY": "etc/managedblockchain-tls-chain.pem"
      }
     },
@@ -2171,7 +2171,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "HyperledgerTestStack/IntegrationTestNetwork/UserFunction/Resource",
-    "aws:asset:path": "C:\\Users\\Rajaguru Selvaraj\\Desktop\\hyper\\infra\\node_modules\\@cdklabs\\cdk-hyperledger-fabric-network\\lambdas\\fabric",
+    "aws:asset:path": "/mnt/c/Users/SivaprakashSelvamani/Downloads/final_hyper/hyper/node_modules/@cdklabs/cdk-hyperledger-fabric-network/lambdas/fabric",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -2259,7 +2259,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "8e3d635893ea17fa3158623489cd42c680fad925b38de1ef51cb10d84f6e245e.zip"
     },
     "Role": {
@@ -2374,7 +2374,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "c56527323fe165e19e5c38b88f77270ba67c06d0fd17823264a8e1268ef9ce50.zip"
     },
     "Role": {
@@ -2436,7 +2436,7 @@
            "Fn::Join": [
             "",
             [
-             "arn:aws:ec2:us-east-1:933994691605:security-group/",
+             "arn:aws:ec2:ap-southeast-1:799671204862:security-group/",
              {
               "Fn::GetAtt": [
                "IntegrationTestNetworkNetworkClientClientVpc60D080D6",
@@ -2461,7 +2461,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip"
     },
     "Timeout": 900,
@@ -2552,7 +2552,7 @@
     "Handler": "index.handler",
     "Runtime": "nodejs16.x",
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-933994691605-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-799671204862-ap-southeast-1",
      "S3Key": "5fa1330271b8967d9254ba2d4a07144f8acefe8b77e6d6bba38261373a50d5f8.zip"
     },
     "Role": {
@@ -2576,144 +2576,10 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31SXU/cMBD8Lbw7hgO1ur71OBWK1NJTqHg9bZy9YOLYkde+6BTlv3ed5AICqU8ez3g/PLvXcv1FXl1AR5kq68zoQvZPAVQtmNr3hMpjoAYsVOhZGu9ie7ATGsQklYVxqlYvoK3sWf2NTYE+vXt0JQ7CQFOUwPHaVgaDs3fRqqCdFQvgt2c8CA2N7HfOaHVKwoxyZzBd0zkIVNeyf25VYp53W7Hz+ggBn2Jh5xYXlLsY8C8UU/jEv3EbIqc0TO0Y1/1y1djNDB9sQH8AhVzrhy1bp20Q/P3odTjdexfb2Y//EA+28kg0t7pkued+Ozi9S8xWuYpkz4WXTAtmkGNAO3lEN3sg4unITTr4Lm+jqjHcArE9KlJwzZ7LuugVcs5NR9uRzGeOLXNHXaIfxAcheXbGCxjL8HJUPMQPAedEKfBPDG3kj1zJtbxZfbv4zotloKDLtGAvpxa9wZK3KTtA4bXKeBad87Xsf75pd6P0OCnis8BL9ZndGo3JQcuqfKXL42otV195u19J68xH9q1BmU/nP3vk9s75AgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Sy27bMBD8Ft8pJrbRwsc6RpMGaANDKXI1KGqtMKK4Bpe0YAj69y4lRQ4SoCfOznAfHO5Kbr7J24VqKdNlnVlTyO45KF0Lpg4dgfYQqFFOVeBZGmKxO7oR9WKUysKirvWrMk52rP6BpgCf7j1hCb2wqilKxfnGVRYCuvvodDDoxAz47jvuhVGN7PZojb4kYUI5WkhhOnsBeiW7l5NOzMt+J/benFWA51i4acQZ5RgD/FXFmD7yV25LhNqocRyL7W+shmkm+OgC+KPSwL1+uvKExgXBz4/ehMuDx3ia/PgP8egqD0TTqHOVB563VZcPhdkqrEh23HiuNGMGOQRwo0e0Pigi/h25TQfH8i7qGsKdIrZHRwrYHLgtRq+Ba25b2g1kPnFsGZ5NCb4Xn4Tk2TuewdCGl6PiT/yUcC10KzdyvVovfvA6WVXQTVqr18sJvIWSdyg7qsIbnfEPtOhr2f26aveD9DQq4qvAq/SV3VkDyTfHqnyjm/NyI5ff5XLxRsZkPrJbDch8PP8B/zvNs+8CAAA="
    },
    "Metadata": {
     "aws:cdk:path": "HyperledgerTestStack/CDKMetadata/Default"
-   }
-  }
- },
- "Outputs": {
-  "NetworkId": {
-   "Description": "Managed Blockchain network identifier",
-   "Value": {
-    "Fn::GetAtt": [
-     "IntegrationTestNetworkFEDC81D0",
-     "NetworkId"
-    ]
-   }
-  },
-  "MemberId": {
-   "Description": "Managed Blockchain member identifier",
-   "Value": {
-    "Fn::GetAtt": [
-     "IntegrationTestNetworkFEDC81D0",
-     "MemberId"
-    ]
-   }
-  },
-  "VpcEndpointServiceName": {
-   "Description": "Managed Blockchain network VPC endpoint service name",
-   "Value": {
-    "Fn::GetAtt": [
-     "IntegrationTestNetworkNetworkDataResource01F5B5DD",
-     "Network.VpcEndpointServiceName"
-    ]
-   }
-  },
-  "OrdererEndpoint": {
-   "Description": "Managed Blockchain network ordering service endpoint",
-   "Value": {
-    "Fn::GetAtt": [
-     "IntegrationTestNetworkNetworkDataResource01F5B5DD",
-     "Network.FrameworkAttributes.Fabric.OrderingServiceEndpoint"
-    ]
-   }
-  },
-  "CaEndpoint": {
-   "Description": "Managed Blockchain member CA endpoint",
-   "Value": {
-    "Fn::GetAtt": [
-     "IntegrationTestNetworkMemberDataResourceF0A4DF56",
-     "Member.FrameworkAttributes.Fabric.CaEndpoint"
-    ]
-   }
-  },
-  "AdminPasswordArn": {
-   "Description": "Secret ARN for the Hyperledger Fabric admin password",
-   "Value": {
-    "Ref": "IntegrationTestNetworkAdminPasswordCB94E790"
-   }
-  },
-  "AdminPrivateKeyArn": {
-   "Description": "Secret ARN for Hyperledger Fabric admin private key",
-   "Value": {
-    "Ref": "IntegrationTestNetworkAdminPrivateKeyA613717D"
-   }
-  },
-  "AdminSignedCertArn": {
-   "Description": "Secret ARN for Hyperledger Fabric admin signed certificate",
-   "Value": {
-    "Ref": "IntegrationTestNetworkAdminSignedCertE1800B2A"
-   }
-  },
-  "NodeIds": {
-   "Description": "Comma-separated list of Managed Blockchain node identifiers",
-   "Value": {
-    "Fn::Join": [
-     "",
-     [
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode0Node9BCFF789",
-        "NodeId"
-       ]
-      },
-      ",",
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode1Node42670A0E",
-        "NodeId"
-       ]
-      }
-     ]
-    ]
-   }
-  },
-  "NodeEndpoints": {
-   "Description": "Comma-separated list of Managed Blockchain node endpoints",
-   "Value": {
-    "Fn::Join": [
-     "",
-     [
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode0NodeDataResourceAB2D8738",
-        "Node.FrameworkAttributes.Fabric.PeerEndpoint"
-       ]
-      },
-      ",",
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode1NodeDataResource7113DB86",
-        "Node.FrameworkAttributes.Fabric.PeerEndpoint"
-       ]
-      }
-     ]
-    ]
-   }
-  },
-  "NodeEventEndpoints": {
-   "Description": "Comma-separated list of Managed Blockchain node event endpoints",
-   "Value": {
-    "Fn::Join": [
-     "",
-     [
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode0NodeDataResourceAB2D8738",
-        "Node.FrameworkAttributes.Fabric.PeerEventEndpoint"
-       ]
-      },
-      ",",
-      {
-       "Fn::GetAtt": [
-        "IntegrationTestNetworkNode1NodeDataResource7113DB86",
-        "Node.FrameworkAttributes.Fabric.PeerEventEndpoint"
-       ]
-      }
-     ]
-    ]
    }
   }
  },
